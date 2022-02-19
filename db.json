@@ -1,0 +1,36 @@
+{
+  "customers": [
+    {
+        "dni": "27098734",
+        "name": "Tadeo Guerstein",
+        "age": 19
+    },
+    {
+        "dni": "83048746",
+        "name": "Ricky Martin",
+        "age": 40
+    },
+    {
+        "dni": "83927479",
+        "name": "Luis Miguel",
+        "age": 56
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

@@ -5,16 +5,35 @@ import AppFrame from '../components/AppFrame';
 import CustomerEdit from '../components/CustomerEdit';
 import CustomerData from '../components/CustomerData';
 import { getCustomerByDni } from '../selectors/customers';
-import { Route } from 'react-router-dom';
-
+import { Route, withRouter } from 'react-router-dom';
+import { fetchCustomers } from '../action/fetchCustomers';
+import { updateCustomer } from '../action/updateCustomer'
 
 class CustomerContainer extends Component {
-    // <p>Data of the Client {this.props.customer.name}</p>
+
+    componentDidMount() {
+        if(!this.props.customer){
+            this.props.fetchCustomers();
+        }
+    }
+
+    handleSubmit = values => {
+        const { id } = values
+        this.props.updateCustomer(id, values)
+    }
+
+    handleOnBack = () => {
+        this.props.history.goBack();
+    }
+
     renderBody = () => (
         <Route path="/customers/:dni/edit" children={
             ({ match }) => { 
                 const CustomerControl = match ? CustomerEdit : CustomerData;
-                return <CustomerControl {...this.props.customer}/> 
+                return <CustomerControl 
+                    { ...this.props.customer} 
+                    onSubmit={this.handleSubmit}
+                    onBack={this.handleOnBack}/> 
             }
         }/>
     )
@@ -32,11 +51,13 @@ class CustomerContainer extends Component {
 
 CustomerContainer.propTypes = {
     dni: PropTypes.string.isRequired,
-    customer: PropTypes.object.isRequired,
+    customer: PropTypes.object,
+    fetchCustomers: PropTypes.func.isRequired,
+    updateCustomer: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state, props) => ({
     customer: getCustomerByDni(state, props)
 });
 
-export default connect(mapStateToProps, null)(CustomerContainer)
+export default withRouter(connect(mapStateToProps, { fetchCustomers, updateCustomer })(CustomerContainer))

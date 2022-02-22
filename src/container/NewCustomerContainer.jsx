@@ -4,7 +4,7 @@ import AppFrame from '../components/AppFrame'
 import CustomerEdit from '../components/CustomerEdit';import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { insertCustomer } from '../action/insertCustomer';
-import { SubmissionError } from 'redux-form';
+// import { SubmissionError } from 'redux-form';
 
 class NewCustomerContainer extends Component {
 

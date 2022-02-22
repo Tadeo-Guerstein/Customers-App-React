@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
 import { setPropsAsInitial } from '../helpers/setPropsAsInitial';
@@ -23,72 +23,80 @@ const isNumber = value => (
     isNaN(Number(value)) && "It has to be a number"
 )
 
-const MyField = ({ input, meta, type, label, name }) => {
-    return (
-        <div>
-            <label htmlFor={name}>{label}</label>
-
-            <input {...input} type={ !type ? "text" : type } />
-            {
-                meta.touched && meta.error && <span>{meta.error}</span>
-            }
-        </div>
-    )
-}
-
 const toNumber = value => value && Number(value)
-
-const toUpper = value => value && value.toUpperCase()
-
-const toLower = value => value && value.toLowerCase()
 
 const onlyGrow = (value, previousValue, values) => 
     value && (!previousValue ? value : (value > previousValue ? value : previousValue));
 
-const CustomerEdit = ({ 
-    name, dni, age, handleSubmit, submitting, onBack, pristine, submitSucceeded }) => {
-    return (
-        <div>
-            <h2>Client Edit</h2>
-            <form onSubmit={handleSubmit}>
-                <Field 
-                    name="name" 
-                    component={MyField}
-                    label="Name: "
-                    parse={toUpper}
-                    format={toLower}
-                />
+class CustomerEdit extends Component {
 
-                <Field 
-                    name="dni" 
-                    component={MyField}
-                    label="Dni: "
-                />
+    componentDidMount() { 
+        if(this.txt){
+            this.txt.focus()
+        }
+    }
 
-                <Field 
-                    name="age" 
-                    component={MyField} 
-                    type="number"
-                    validate={isNumber}
-                    label="Age: "
-                    parse={toNumber}
-                    normalize={onlyGrow}
+    renderField = ({ input, meta, type, label, name, withFocus }) => {
+        const controls = {...input, value: input["value"] || ""}
+        return (
+            <div>
+                <label htmlFor={name}>{label}</label>
+                <input 
+                    {...controls} 
+                    type={ !type ? "text" : type } 
+                    ref={withFocus && (txt => this.txt = txt)} 
                 />
-                <CustomersActions>
-                    <button type="submit" disabled={pristine || submitting}>
-                        Accept
-                    </button>
-                    <button type="button" disabled={submitting} onClick={onBack}>
-                        Cancel
-                    </button>
-                </CustomersActions>
-                <Prompt 
-                    when={!pristine && !submitSucceeded}
-                    message="Your going to lose the changes. Do you want to continue?"/>
-            </form>
-        </div>
-    )
-}
+                {
+                    meta.touched && meta.error && <span>{meta.error}</span>
+                }
+            </div>
+        )
+    }
+
+    render(){
+        const { handleSubmit, submitting, onBack, pristine, submitSucceeded } = this.props
+        return (
+            <div>
+                <h2>Client Edit</h2>
+                <form onSubmit={handleSubmit}>
+                    <Field 
+                        withFocus
+                        name="name" 
+                        component={this.renderField}
+                        label="Name: "
+                    />
+    
+                    <Field 
+                        name="dni" 
+                        component={this.renderField}
+                        label="Dni: "
+                    />
+    
+                    <Field 
+                        name="age" 
+                        component={this.renderField} 
+                        type="number"
+                        validate={isNumber}
+                        label="Age: "
+                        parse={toNumber}
+                        normalize={onlyGrow}
+                    />
+                    <CustomersActions>
+                        <button type="submit" disabled={pristine || submitting}>
+                            Accept
+                        </button>
+                        <button type="button" disabled={submitting} onClick={onBack}>
+                            Cancel
+                        </button>
+                    </CustomersActions>
+                    <Prompt 
+                        when={!pristine && !submitSucceeded}
+                        message="Your going to lose the changes. Do you want to continue?"/>
+                </form>
+            </div>
+        )
+    }   
+} 
 
 CustomerEdit.propTypes = {
     name: PropTypes.string, 

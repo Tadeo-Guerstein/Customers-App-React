@@ -1,6 +1,6 @@
 export const apiGet = (url) => () => fetch(url).then(v => v.json());
 
-export const apiPut = (url, id, obj) => 
+export const apiPut = (url, id, obj)  =>
     fetch(`${url}/${id}`, {
         method: 'PUT',
         body: JSON.stringify(obj),
@@ -13,7 +13,7 @@ export const apiPut = (url, id, obj) =>
         return r;
     })
 
-export const apiPost = (url, obj) => {
+export const apiPost = (url, obj) =>
     fetch(`${url}`, {
         method: 'POST',
         body: JSON.stringify(obj),
@@ -25,4 +25,3 @@ export const apiPost = (url, obj) => {
         }
         return r
     })
-}

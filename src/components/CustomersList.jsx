@@ -3,13 +3,12 @@ import PropTypes from 'prop-types'
 import CustomerListItem from './CustomerListItem';
 
 const CustomersList = ({ customers, urlPath }) => {
-    console.log(customers)
     return (
         <div>
             <div className="customers-list-item">
                 {
                     customers.map(c => 
-                        <CustomerListItem 
+                        c && <CustomerListItem 
                             key={c.dni}
                             dni={c.dni}
                             name={c.name}

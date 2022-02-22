@@ -2,21 +2,27 @@
   "customers": [
     {
       "id": "1",
-      "dni": "27098734",
-      "name": "Tadeo Guerstein",
-      "age": 19
+      "dni": "123123123",
+      "name": "Tade",
+      "age": 1923123123
     },
     {
       "id": "2",
-      "dni": "83048746",
+      "dni": "83048746123",
       "name": "Ricky Martin",
-      "age": 40
+      "age": 41
     },
     {
       "id": "3",
-      "dni": "83927479",
+      "dni": "83927479123",
       "name": "Luis Miguel",
       "age": 56
+    },
+    {
+      "id": "30000001",
+      "dni": "30000001",
+      "name": "FACUNDO 2",
+      "age": 30
     }
   ],
   "posts": [

@@ -20,7 +20,7 @@ const CustomerData = ({ name, dni, age, onBack }) => {
 
 CustomerData.propTypes = {
     name: PropTypes.string.isRequired, 
-    dni: PropTypes.number.isRequired, 
+    dni: PropTypes.string.isRequired, 
     age: PropTypes.number,
     onBack: PropTypes.func.isRequired
 }

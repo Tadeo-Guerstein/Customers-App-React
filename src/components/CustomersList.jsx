@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import CustomerListItem from './CustomerListItem';
 
 const CustomersList = ({ customers, urlPath }) => {
+    console.log(customers)
     return (
         <div>
             <div className="customers-list-item">

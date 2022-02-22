@@ -8,6 +8,7 @@ import { getCustomerByDni } from '../selectors/customers';
 import { Route, withRouter } from 'react-router-dom';
 import { fetchCustomers } from '../action/fetchCustomers';
 import { updateCustomer } from '../action/updateCustomer'
+import { SubmissionError } from 'redux-form';
 
 class CustomerContainer extends Component {
 
@@ -18,11 +19,19 @@ class CustomerContainer extends Component {
     }
 
     handleSubmit = values => {
-        const { id } = values
-        this.props.updateCustomer(id, values)
+        const { id } = values;
+        return this.props.updateCustomer(id, values).then(r => {
+            if(r.payload && r.payload.error){
+                throw new SubmissionError(r.payload)
+            }
+        });
     }
 
     handleOnBack = () => {
+        this.props.history.goBack();
+    }
+
+    handleOnSubmitSuccess = () => {
         this.props.history.goBack();
     }
 
@@ -33,6 +42,7 @@ class CustomerContainer extends Component {
                 return <CustomerControl 
                     { ...this.props.customer} 
                     onSubmit={this.handleSubmit}
+                    onSubmitSuccess={this.handleOnSubmitSuccess}
                     onBack={this.handleOnBack}/> 
             }
         }/>

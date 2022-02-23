@@ -12,9 +12,9 @@ class HomeContainer extends Component {
     render() {
         return (
             <div>
-                <AppFrame header="home" body={
+                <AppFrame header="Clients" body={
                     <div>
-                        This is the main Page
+                        <p>Add, edit and delete clients!</p>
                         <CustomersActions>
                             <button onClick={this.handleOnClick}>
                                 List of Clients

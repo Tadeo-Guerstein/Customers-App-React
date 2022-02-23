@@ -1,28 +1,16 @@
 {
   "customers": [
     {
-      "id": "1",
-      "dni": "123123123",
-      "name": "Tade",
-      "age": 1923123123
+      "name": "Tadeo",
+      "dni": "94583899",
+      "age": 19,
+      "id": 1
     },
     {
-      "id": "2",
-      "dni": "83048746123",
-      "name": "Ricky Martin",
-      "age": 41
-    },
-    {
-      "id": "3",
-      "dni": "83927479123",
-      "name": "Luis Miguel",
-      "age": 56
-    },
-    {
-      "id": "30000001",
-      "dni": "30000001",
-      "name": "FACUNDO 2",
-      "age": 30
+      "name": "pilar scollo",
+      "dni": "123123",
+      "age": 567,
+      "id": 2
     }
   ],
   "posts": [
